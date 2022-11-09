@@ -9,7 +9,7 @@ const products = [];
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.set('views','./views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
@@ -24,9 +24,9 @@ app.post('/products', (req, res) => {
 });
 
 const server = app.listen(port, () => {
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
+    console.log(`Server http listening http://localhost:${port}`);
 });
 
-server.on('error', error => {
-    console.log('Error en servidor', error);
+server.on('error', err => {
+    console.log('Server error', err);
 });
