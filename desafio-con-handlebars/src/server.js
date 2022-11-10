@@ -1,34 +1,29 @@
 const express = require('express');
+
 const exphbs = require('express-handlebars');
 
 const app = express();
 
-const port = 8080;
-
-const products = [];
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 app.engine('handlebars', exphbs.engine());
+app.set('view engine', 'handlebars');
 
 app.set('views', './views')
-app.set('view engine', 'hbs');
-
 
 app.get('/', (req, res) => {
-    res.render('introduction', { products });
-  });
+  res.render('stock', {
+    product_name: 'Ati readeon',
+    batch: 'pn01',
+    price: 34440,
+    category: 'placas de video',
+  })
+})
 
-app.post('/products', (req, res) => {
-    products.push(req.body);
-    res.redirect('/');
-  });
+const port = 8080;
 
 const server = app.listen(port, () => {
-    console.log(`Http server listening http://localhost:${port}`);
+  console.log(`Http server listening http://localhost:${port}`);
 });
 
 server.on('error', err => {
-    console.log('Server error', err);
+  console.log('Server error', err);
 });
